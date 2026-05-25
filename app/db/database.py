@@ -1,0 +1,16 @@
+from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import Session
+
+from app.db.session import SessionLocal
+
+Base = declarative_base()
+
+
+def get_db() -> Session:
+    db = SessionLocal()
+
+    try:
+        yield db
+
+    finally:
+        db.close()
