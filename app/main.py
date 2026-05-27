@@ -12,21 +12,18 @@ from fastapi import Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException
 
-Base.metadata.create_all(bind=engine)
-
-seed_data()
-
-app = FastAPI(
-    title="Deployment Service API",
-    version="1.0.0"
-)
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
     seed_data()
     yield
-    
+
+app = FastAPI(
+    title="Deployment Service API",
+    version="1.0.0",
+    lifespan=lifespan,
+)
+
 app.include_router(deployment_router)
 
 @app.get("/health")
