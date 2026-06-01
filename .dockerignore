@@ -1,4 +1,5 @@
 .venv/
+.env
 .venv_deployment_service/
 __pycache__/
 .pytest_cache/

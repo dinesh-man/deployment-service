@@ -53,6 +53,14 @@ pip install -r requirements.txt
 
 ---
 
+### 3. Create `.env` file in the project root
+
+```env
+DATABASE_URL=sqlite:///./deployments.db
+```
+
+---
+
 ### 4. Run application
 
 ```bash
@@ -82,7 +90,7 @@ docker build -t deployment-service .
 ### Run container
 
 ```bash
-docker run -p 8000:8000 deployment-service
+docker run --env-file .env -p 8000:8000 deployment-service
 ```
 
 ---
